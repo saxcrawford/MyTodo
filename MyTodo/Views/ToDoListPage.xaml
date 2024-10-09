@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyTodo.Views.ToDoListPage"
+             xmlns:viewmodel="clr-namespace:MyTodo.Models"
+             x:DataType="viewmodel:MainViewModel">
+    
+    <Grid Padding="20" RowDefinitions="*,Auto">
+        
+        <CollectionView Grid.Row="0"
+                        ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    <Grid Padding="0,5">
+                        <Frame>
+                            <Grid Margin="-10" Padding="-10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Label Text="{Binding .}"
+                                       Padding="10,0,0,0"
+                                       FontSize="16"
+                                       VerticalOptions="Center"/>
+                                
+                                <Button Grid.Column="1"
+                                        MaximumHeightRequest="20"
+                                        MaximumWidthRequest="20"
+                                        BackgroundColor="Transparent"
+                                        BorderColor="Firebrick"
+                                        BorderWidth="2"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=DeleteCommand}"
+                                        CommandParameter="{Binding .}">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroupList>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Scale"
+                                                                Value="1" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="Background" Value="Crimson"/>
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="PointerOver">
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateGroupList>
+                                    </VisualStateManager.VisualStateGroups>
+                                </Button>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

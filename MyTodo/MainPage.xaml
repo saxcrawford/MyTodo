@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyTodo.MainPage"
+             xmlns:viewmodel="clr-namespace:MyTodo.Models"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             x:DataType="viewmodel:MainViewModel">
+
+    <VerticalStackLayout
+        Padding="30,0"
+        Spacing="10"
+        VerticalOptions="Center">
+        
+           <Label x:Name="DateLabel"
+                  FontSize="24"
+                  HorizontalOptions="Center"
+                  VerticalOptions="Start" />
+
+           <Frame MaximumWidthRequest="500">
+                <Grid RowDefinitions="Auto,Auto,Auto"
+                      RowSpacing="20"
+                      ColumnSpacing="0">
+                    <Label Grid.Row="0"
+                           Text="Task Name"
+                           FontSize="16"
+                           CharacterSpacing="1"
+                    />
+                    <Entry Grid.Row="1"
+                           Placeholder="Task 1" 
+                           Text="{Binding Text}"
+                           HorizontalOptions="FillAndExpand"
+                           ClearButtonVisibility="WhileEditing"
+                           FontSize="16"
+                           CharacterSpacing="1"
+                           />
+                    
+                    <Button Grid.Row="2"
+                            Command="{Binding AddCommand}"
+                            Text="Add Task"
+                            CharacterSpacing="1"
+                            BorderWidth="2"
+                            BackgroundColor="LimeGreen"
+                            BorderColor="ForestGreen">
+                           <VisualStateManager.VisualStateGroups>
+                                  <VisualStateGroupList>
+                                         <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal">
+                                                       <VisualState.Setters>
+                                                              <Setter Property="Scale"
+                                                                      Value="1" />
+                                                       </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                       <VisualState.Setters>
+                                                              <Setter Property="Scale"
+                                                                      Value="0.9" />
+                                                       </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="PointerOver">
+                                                </VisualState>
+                                         </VisualStateGroup>
+                                  </VisualStateGroupList>
+                           </VisualStateManager.VisualStateGroups>
+                    </Button>
+
+                </Grid>
+           </Frame>
+        
+    </VerticalStackLayout>
+
+</ContentPage>
